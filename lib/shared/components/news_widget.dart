@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ArticleWidget extends StatelessWidget {
-  dynamic article;
+  final dynamic article;
 
-  ArticleWidget({required this.article});
+  const ArticleWidget({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +22,11 @@ class ArticleWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
           Expanded(
-            child: Container(
+            child: SizedBox(
               height: 120,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,17 +35,14 @@ class ArticleWidget extends StatelessWidget {
                   Expanded(
                     child: Text(
                       '${article['title']}',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                      ),
+                      style: Theme.of(context).textTheme.bodyText1,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Text(
                     '${article['publishedAt']}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.grey,
                     ),
                   ),

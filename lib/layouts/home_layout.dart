@@ -9,65 +9,67 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return AppCubit()..getBusiness();
-      },
-      child: BlocConsumer<AppCubit, AppStates>(
-        builder: (context, state) {
-          print('hi');
-          AppCubit cubit = AppCubit.get(context);
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                'News App',
+    return BlocConsumer<AppCubit, AppStates>(
+      builder: (context, state) {
+        AppCubit cubit = AppCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              'News App',
+            ),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.search,
+                ),
               ),
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.search,
-                  ),
-                )
-              ],
-            ),
-            body: cubit.screens[cubit.currentIndex],
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: cubit.currentIndex,
-              onTap: (value) {
-                cubit.changeBetweenBottomNavBarItems(value);
-              },
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.business,
-                  ),
-                  label: 'Business',
+              IconButton(
+                onPressed: () {
+                  cubit.changeModeTheme();
+                },
+                icon: const Icon(
+                  Icons.brightness_4_outlined,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.sports,
-                  ),
-                  label: 'Sports',
+              ),
+            ],
+          ),
+          body: cubit.screens[cubit.currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: cubit.currentIndex,
+            onTap: (value) {
+              cubit.changeBetweenBottomNavBarItems(value);
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.business,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.science,
-                  ),
-                  label: 'Science',
+                label: 'Business',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.sports,
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.settings,
-                  ),
-                  label: 'Settings',
+                label: 'Sports',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.science,
                 ),
-              ],
-            ),
-          );
-        },
-        listener: (context, state) {},
-      ),
+                label: 'Science',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.settings,
+                ),
+                label: 'Settings',
+              ),
+            ],
+          ),
+        );
+      },
+      listener: (context, state) {},
     );
   }
 }

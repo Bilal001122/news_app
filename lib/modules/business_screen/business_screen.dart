@@ -13,9 +13,9 @@ class BusinessScreen extends StatelessWidget {
     return BlocConsumer<AppCubit, AppStates>(
       builder: (context, state) {
         List<dynamic> news = AppCubit.get(context).business;
-        return state is! AppGetBusinessLoadingState
+        return news.isNotEmpty
             ? ListView.separated(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ArticleWidget(
                     article: news[index],
@@ -24,11 +24,11 @@ class BusinessScreen extends StatelessWidget {
                 separatorBuilder: (context, index) {
                   return Container(
                     height: 2,
-                    color: Colors.grey[200],
+                    color: Colors.grey[500],
                   );
                 },
                 itemCount: 10)
-            : Center(
+            : const Center(
                 child: CircularProgressIndicator(
                   color: Colors.deepOrange,
                 ),

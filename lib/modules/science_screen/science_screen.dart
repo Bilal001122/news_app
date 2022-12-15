@@ -24,7 +24,7 @@ class ScienceScreen extends StatelessWidget {
                 separatorBuilder: (context, index) {
                   return Container(
                     height: 2,
-                    color: Colors.grey[200],
+                    color: Colors.grey[500],
                   );
                 },
                 itemCount: 10)

@@ -5,7 +5,6 @@ import 'package:news_app/modules/settings_screen/settings_screen.dart';
 import 'package:news_app/modules/sports_screen/sports_screen.dart';
 import 'package:news_app/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
-
 import '../../modules/business_screen/business_screen.dart';
 import '../network/remote/dio.dart';
 
@@ -15,21 +14,26 @@ class AppCubit extends Cubit<AppStates> {
   static AppCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
+  bool isDark = false;
   List<Widget> screens = [
-    BusinessScreen(),
-    SportsScreen(),
-    ScienceScreen(),
-    SettingsScreen(),
+    const BusinessScreen(),
+    const SportsScreen(),
+    const ScienceScreen(),
+    const SettingsScreen(),
   ];
 
   List<dynamic> business = [];
   List<dynamic> sports = [];
   List<dynamic> science = [];
+
   void changeBetweenBottomNavBarItems(int index) {
     currentIndex = index;
-    if (currentIndex == 1) getSports();
-    if (currentIndex == 2) getScience();
     emit(AppBottomNavState());
+  }
+
+  void changeModeTheme() {
+    isDark = !isDark;
+    emit(AppThemeChangeState());
   }
 
   void getBusiness() {
