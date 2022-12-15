@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/modules/science_screen/science_screen.dart';
-import 'package:news_app/modules/settings_screen/settings_screen.dart';
-import 'package:news_app/modules/sports_screen/sports_screen.dart';
 import 'package:news_app/shared/cubit/states.dart';
 import 'package:flutter/material.dart';
-import '../../modules/business_screen/business_screen.dart';
+import '../../screens/business_screen/business_screen.dart';
+import '../../screens/science_screen/science_screen.dart';
+import '../../screens/settings_screen/settings_screen.dart';
+import '../../screens/sports_screen/sports_screen.dart';
 import '../network/remote/dio.dart';
 
 class AppCubit extends Cubit<AppStates> {
