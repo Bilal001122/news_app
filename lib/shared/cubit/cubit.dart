@@ -26,6 +26,7 @@ class AppCubit extends Cubit<AppStates> {
   List<dynamic> business = [];
   List<dynamic> sports = [];
   List<dynamic> science = [];
+  List<dynamic> searchList = [];
 
   void changeBetweenBottomNavBarItems(int index) {
     currentIndex = index;
@@ -49,7 +50,7 @@ class AppCubit extends Cubit<AppStates> {
     DioHelper.getData(url: 'v2/top-headlines', query: {
       'country': 'us',
       'category': 'business',
-      'apiKey': '4e1225c5fdd8413a88422e613a3c4d82',
+      'apiKey': '58b98b48d2c74d9c94dd5dc296ccf7b6',
     }).then((value) {
       business = value.data['articles'];
       print(business[0]['title']);
@@ -66,7 +67,7 @@ class AppCubit extends Cubit<AppStates> {
       DioHelper.getData(url: 'v2/top-headlines', query: {
         'country': 'us',
         'category': 'sports',
-        'apiKey': '4e1225c5fdd8413a88422e613a3c4d82',
+        'apiKey': '58b98b48d2c74d9c94dd5dc296ccf7b6',
       }).then((value) {
         sports = value.data['articles'];
         print(sports[0]['title']);
@@ -88,7 +89,7 @@ class AppCubit extends Cubit<AppStates> {
       DioHelper.getData(url: 'v2/top-headlines', query: {
         'country': 'us',
         'category': 'science',
-        'apiKey': '4e1225c5fdd8413a88422e613a3c4d82',
+        'apiKey': '58b98b48d2c74d9c94dd5dc296ccf7b6',
       }).then((value) {
         science = value.data['articles'];
         print(science[0]['title']);
@@ -100,5 +101,19 @@ class AppCubit extends Cubit<AppStates> {
     } else {
       emit(AppGetScienceSuccessState());
     }
+  }
+
+  void getSearch(String value) {
+    emit(AppGetScienceLoadingState());
+    DioHelper.getData(url: 'v2/everything', query: {
+      'q': value,
+      'apiKey': '58b98b48d2c74d9c94dd5dc296ccf7b6',
+    }).then((value) {
+      searchList = value.data['articles'];
+      emit(AppGetSearchSuccessState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(AppGetSearchOnErrorState(onError.toString()));
+    });
   }
 }

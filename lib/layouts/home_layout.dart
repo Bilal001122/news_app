@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/screens/search_screen/search_screen.dart';
 import 'package:news_app/shared/cubit/cubit.dart';
 
 import '../shared/cubit/states.dart';
@@ -19,7 +20,14 @@ class HomeLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SearchScreen(),
+                    ),
+                  );
+                },
                 icon: const Icon(
                   Icons.search,
                 ),
